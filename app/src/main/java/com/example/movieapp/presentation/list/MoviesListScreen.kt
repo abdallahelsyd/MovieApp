@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,7 +28,6 @@ import androidx.paging.compose.items
 import com.example.movieapp.domain.models.MoviesResponse
 import com.example.movieapp.presentation.Screen
 import com.example.movieapp.presentation.list.components.MovieItem
-
 @Composable
 fun MoviesListScreen(
     navController: NavController,
@@ -39,14 +39,13 @@ fun MoviesListScreen(
 
     val moviesListItems: LazyPagingItems<MoviesResponse.Result> = viewModel.movie.collectAsLazyPagingItems()
 
-
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(state = listState) {
             items(moviesListItems) { item ->
                 item?.let { movie ->
                     MovieItem(movie, onItemClick = {
-                        Toast.makeText(context, item.title, Toast.LENGTH_SHORT).show()
-                        //navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
+                        Toast.makeText(context, movie.title, Toast.LENGTH_SHORT).show()
+                        navController.navigate(Screen.MovieDetailScreen.route + "/${movie.id}")
                     })
                 }
             }

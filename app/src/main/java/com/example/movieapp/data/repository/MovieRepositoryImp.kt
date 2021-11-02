@@ -10,7 +10,7 @@ class MovieRepositoryImp @Inject constructor(
     private val moviesApi:MoviesAPI
 ):MovieRepository{
     override suspend fun getMovies(): MoviesResponse {
-        return moviesApi.getMovies()
+        return moviesApi.getMovies(10,1)
     }
 
     override suspend fun getMovieById(movieID:String): MovieResponse {
